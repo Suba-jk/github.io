@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Photo Gallery</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="node_modules/@fortawesome/fontawesome-free/css/all.min.css">
+</head>
+<body>
+
+<header>
+    <div id="navbar-container"></div>
+</header>
+
+<!-- Gallery Section -->
+<<div class="container mt-5">
+    <h1>Event Photo Gallery</h1>
+    <div class="row" id="gallery">
+        <!-- Images will be added here dynamically -->
+    </div>
+</div>
+
+
+<!-- Lightbox Modal -->
+<div id="lightboxModal" class="modal">
+    <div class="modal-content">
+        <span class="close" id="closeLightbox">&times;</span>
+        <div class="lightbox-wrapper">
+            <img id="lightboxImage" src="" alt="Event Image" class="img-fluid">
+            <div class="navigation">
+                <button id="prev" class="btn btn-secondary">Prev</button>
+                <button id="next" class="btn btn-secondary">Next</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Include JS Files -->
+<script src="node_modules/jquery/dist/jquery.min.js"></script>
+<script src="node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="js/gallery.js"></script>
+<script src="js/main.js"></script>
+
+</body>
+</html>

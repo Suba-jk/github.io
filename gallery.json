@@ -1,0 +1,38 @@
+[
+  {
+    "id": 1,
+    "url": "https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
+    "alt": "Volunteers coding",
+    "description": "A group of volunteers building a software to help the elderly ."
+  },
+  {
+    "id": 2,
+    "url": "https://images.pexels.com/photos/6646918/pexels-photo-6646918.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+    "alt": "Volunteers serving food",
+    "description": "Volunteers serving food at a local shelter."
+  },
+  {
+    "id": 3,
+    "url": "https://images.pexels.com/photos/6646917/pexels-photo-6646917.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+    "alt": "Volunteers serving the community",
+    "description": "Volunteers serving the community."
+  },
+  {
+    "id": 4,
+    "url": "https://img.freepik.com/free-photo/assistance-given-by-charitable-group-less-privileged-through-non-profit-initiative-ensures-warm-meals-essential-items-homeless-needy-woman-food-drive-feeding-poor-people_482257-70277.jpg",
+    "alt": "Charitable group assisting the less privileged",
+    "description": "A charitable group providing warm meals and essential items to the homeless."
+  },
+  {
+    "id": 5,
+    "url": "https://media.gettyimages.com/id/1314821287/photo/young-woman-picking-up-litter-thrown-away-in-the-park.jpg?s=612x612&w=gi&k=20&c=GSQTYNnaXt5aQ57dPX12Wo_hcq2vRkYOPrVxg6GAZws=",
+    "alt": "Volunteer appreciation event",
+    "description": "A volunteer making the planet a cleaner place ."
+  },
+  {
+    "id": 6,
+    "url": "https://t3.ftcdn.net/jpg/09/86/48/66/360_F_986486662_Afu3IBrlk24mnbcn9cKUZOoSPnz6X85P.jpg",
+    "alt": "Volunteers working together",
+    "description": "Volunteers working together on a community project."
+  }
+]

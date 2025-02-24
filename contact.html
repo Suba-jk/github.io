@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact</title>
+  <!-- Linked CSS -->
+  <link rel="stylesheet" href="./css/style.css">
+  <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="./node_modules/@fortawesome/fontawesome-free/css/all.min.css">
+</head>
+<body>
+
+<!-- Navigation -->
+<header>
+  <div id="navbar-container"></div>
+</header>
+
+<!-- Contact Form Section -->
+<main class="container my-5">
+  <h1 class="mb-4">Contact Section</h1>
+  <form id="feedbackForm" class="col-lg-6 col-md-10 col-sm-12 mb-4">
+    <div class="input-group mb-3">
+      <span class="input-group-text">Full Name</span>
+      <input id="fullName" name="fullName" type="text" class="form-control" aria-label="Full Name" required>
+    </div>
+
+    <div class="input-group mb-3">
+      <span class="input-group-text">Email Address</span>
+      <input id="emailAddress" name="emailAddress" type="email" class="form-control" aria-label="Email Address" required>
+    </div>
+
+    <div class="input-group mb-3">
+      <span class="input-group-text">Subject</span>
+      <input id="subject" name="subject" type="text" class="form-control" aria-label="Subject" required>
+    </div>
+
+    <div class="input-group mb-3">
+      <span class="input-group-text">Feedback</span>
+      <textarea id="message" name="feedback" class="form-control" aria-label="feedback" required></textarea>
+    </div>
+
+    <!-- Submit and Cancel buttons -->
+    <button id="submitButton" type="submit" class="btn btn-primary me-2">
+      <i class="fa-solid fa-envelope"></i> Submit
+    </button>
+    <button id="cancelButton" type="reset" class="btn btn-warning">
+      <i class="fa-solid fa-rotate-left"></i> Cancel
+    </button>
+  </form>
+
+  <!-- Confirmation Modal -->
+  <div id="confirmationModal" class="modal fade" tabindex="-1" aria-labelledby="confirmationModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="confirmationModalLabel">Feedback Submitted</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <p><strong>Name:</strong> <span id="confirmationName"></span></p>
+          <p><strong>Email:</strong> <span id="confirmationEmail"></span></p>
+          <p><strong>Message:</strong> <span id="confirmationMessage"></span></p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<!-- JavaScript -->
+<script src="node_modules/jquery/dist/jquery.min.js"></script>
+<script src="node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="node_modules/moment/min/moment.min.js"></script>
+
+<!-- Main script for global behaviors -->
+<script src="./js/main.js"></script>
+
+<!-- Contact-specific script -->
+<script src="./js/contact.js"></script>
+
+</body>
+</html>
