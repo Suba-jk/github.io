@@ -1,10 +1,14 @@
 "use strict";
-import express from "express";
-import Database from "./database.js";
-const router = express.Router();
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = __importDefault(require("express"));
+const database_js_1 = __importDefault(require("./database.js"));
+const router = express_1.default.Router();
 router.get('/', async (req, res) => {
     try {
-        const db = await Database.getInstance().connect();
+        const db = await database_js_1.default.getInstance().connect();
         const contacts = await db.collection("contacts").find().toArray();
         res.json(contacts);
     }
@@ -15,7 +19,7 @@ router.get('/', async (req, res) => {
 });
 router.get('/:id', async (req, res) => {
     try {
-        const db = await Database.getInstance().connect();
+        const db = await database_js_1.default.getInstance().connect();
         const contact = await db.collection("contacts").findOne({ id: req.params.id });
         if (contact) {
             res.json(contact);
@@ -31,7 +35,7 @@ router.get('/:id', async (req, res) => {
 });
 router.post('/', async (req, res) => {
     try {
-        const db = await Database.getInstance().connect();
+        const db = await database_js_1.default.getInstance().connect();
         const contacts = await db.collection("contacts").find().toArray();
         const newId = (contacts.length > 0) ?
             (Math.max(...contacts.map(c => parseInt(c.id))) + 1).toString() : '1';
@@ -46,7 +50,7 @@ router.post('/', async (req, res) => {
 });
 router.put('/:id', async (req, res) => {
     try {
-        const db = await Database.getInstance().connect();
+        const db = await database_js_1.default.getInstance().connect();
         const { ...updateData } = req.body;
         const result = await db.collection("contacts")
             .findOneAndUpdate({ id: req.params.id }, { $set: updateData }, { returnDocument: 'after' });
@@ -70,7 +74,7 @@ router.put('/:id', async (req, res) => {
 });
 router.delete('/:id', async (req, res) => {
     try {
-        const db = await Database.getInstance().connect();
+        const db = await database_js_1.default.getInstance().connect();
         const result = await db.collection("contacts").deleteOne({ id: req.params.id });
         if (result.deletedCount > 0) {
             res.json({ message: "Succcesfully deleted contact" });
@@ -84,5 +88,5 @@ router.delete('/:id', async (req, res) => {
         res.status(500).json({ message: "Server Error" });
     }
 });
-export default router;
+exports.default = router;
 //# sourceMappingURL=contactRoutes.js.map

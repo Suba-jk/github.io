@@ -1,6 +1,11 @@
-import { MongoClient } from 'mongodb';
-import dotenv from 'dotenv';
-dotenv.config();
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const mongodb_1 = require("mongodb");
+const dotenv_1 = __importDefault(require("dotenv"));
+dotenv_1.default.config();
 const USER_NAME = process.env.MONGO_USER;
 const PASSWORD = process.env.MONGO_PASSWORD;
 const DB_NAME = process.env.MONGO_DB;
@@ -11,7 +16,7 @@ class Database {
     client;
     db = null;
     constructor() {
-        this.client = new MongoClient(MONGO_URI);
+        this.client = new mongodb_1.MongoClient(MONGO_URI);
     }
     static getInstance() {
         if (!Database.instance) {
@@ -39,5 +44,5 @@ class Database {
         this.db = null;
     }
 }
-export default Database;
+exports.default = Database;
 //# sourceMappingURL=database.js.map
