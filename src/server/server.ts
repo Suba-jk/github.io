@@ -33,14 +33,12 @@ app.use('/node_modules/bootstrap',
 
 // Routes
 app.use('/api/contacts', contactRoutes);
-// ⬇️ Later we'll add:
-// app.use('/api/auth', authRoutes);
 
 app.get('/', (req: Request, res: Response) => {
     res.sendFile(path.join(__dirname, '../..', 'index.html'));
 });
 
-// MongoDB and Server Start
+// Start server
 async function startServer() {
     try {
         const db = Database.getInstance();
@@ -55,5 +53,7 @@ async function startServer() {
     }
 }
 
-await startServer();
 
+startServer().catch((err) => {
+    console.error("[FATAL] Server crash:", err);
+});

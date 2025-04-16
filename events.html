@@ -118,6 +118,66 @@
 <script src="./js/contact.js"></script>
 <script src="./js/main.js"></script>
 <script src="./js/event.js"></script>
+<script>
+    // Load events from MongoDB
+    function loadEvents() {
+        fetch('/api/events')
+            .then(res => res.json())
+            .then(events => {
+                const eventList = document.getElementById('eventList');
+                eventList.innerHTML = '';
+
+                events.forEach(event => {
+                    const div = document.createElement('div');
+                    div.className = 'card p-3 mb-3';
+
+                    div.innerHTML = `
+          <h5>${event.eventName}</h5>
+          <p><strong>Date:</strong> <span id="eventDate-${event._id}">${event.eventDate}</span></p>
+          <input type="date" id="newDate-${event._id}" class="form-control mb-2"/>
+          <button onclick="updateEvent('${event._id}')" class="btn btn-primary btn-sm me-2">Update</button>
+          <button onclick="deleteEvent('${event._id}')" class="btn btn-danger btn-sm">Delete</button>
+        `;
+
+                    eventList.appendChild(div);
+                });
+            });
+    }
+
+    // Update date of an event
+    function updateEvent(eventId) {
+        const newDate = document.getElementById(`newDate-${eventId}`).value;
+
+        fetch(`/api/events/${eventId}`, {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ eventDate: newDate })
+        })
+            .then(res => res.json())
+            .then(updated => {
+                alert('Date updated');
+                document.getElementById(`eventDate-${eventId}`).textContent = newDate;
+            });
+    }
+
+    // Delete an event
+    function deleteEvent(eventId) {
+        if (!confirm('Are you sure you want to delete this event?')) return;
+
+        fetch(`/api/events/${eventId}`, {
+            method: 'DELETE'
+        }).then(() => {
+            alert('Event deleted');
+            loadEvents(); // Refresh the list
+        });
+    }
+
+    // Load on page load
+    document.addEventListener('DOMContentLoaded', loadEvents);
+
+</script>
+
+
 
 
 </body>
