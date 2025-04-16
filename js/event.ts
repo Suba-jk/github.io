@@ -9,12 +9,17 @@ document.addEventListener("DOMContentLoaded", function () {
     const proposeBtn = document.getElementById("proposeEventBtn") as HTMLButtonElement | null;
     const eventFormSection = document.getElementById("eventFormSection") as HTMLElement | null;
     const eventForm = document.getElementById("eventForm") as HTMLFormElement | null;
-    const welcomeText = document.getElementById("welcomeId");
-    const user = sessionStorage.getItem("user");
-    //alert(user);
-    if (user) {
-        welcomeText.innerText = "Welcome " +user;
+//const welcomeText = document.getElementById("welcomeId");
+    //const user = sessionStorage.getItem("user");
+    //
+
+    const user: string | null = sessionStorage.getItem("user");
+    const welcomeText = document.getElementById("welcomeId") as HTMLElement | null;
+
+    if (user && welcomeText) {
+        welcomeText.innerText = `Welcome ${user}`;
     }
+
     if (proposeBtn && eventFormSection) {
         proposeBtn.addEventListener("click", () => {
             const user = sessionStorage.getItem("user");
