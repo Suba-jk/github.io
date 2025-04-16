@@ -1,21 +1,16 @@
 "use strict";
-/**
- * Handles event form validation, event storage, and dynamic display.
- * Also handles login check for showing the form.
- */
 document.addEventListener("DOMContentLoaded", function () {
-    var proposeBtn = document.getElementById("proposeEventBtn");
-    var eventFormSection = document.getElementById("eventFormSection");
-    var eventForm = document.getElementById("eventForm");
-    var welcomeText = document.getElementById("welcomeId");
-    var user = sessionStorage.getItem("user");
-    //alert(user);
-    if (user) {
-        welcomeText.innerText = "Welcome " + user;
+    const proposeBtn = document.getElementById("proposeEventBtn");
+    const eventFormSection = document.getElementById("eventFormSection");
+    const eventForm = document.getElementById("eventForm");
+    const user = sessionStorage.getItem("user");
+    const welcomeText = document.getElementById("welcomeId");
+    if (user && welcomeText) {
+        welcomeText.innerText = `Welcome ${user}`;
     }
     if (proposeBtn && eventFormSection) {
-        proposeBtn.addEventListener("click", function () {
-            var user = sessionStorage.getItem("user");
+        proposeBtn.addEventListener("click", () => {
+            const user = sessionStorage.getItem("user");
             if (!user) {
                 alert("Please log in to propose an event.");
                 window.location.href = "login.html";
@@ -32,28 +27,28 @@ document.addEventListener("DOMContentLoaded", function () {
     }
     eventForm.addEventListener("submit", function (e) {
         e.preventDefault();
-        var eventNameInput = document.getElementById("eventName");
-        var eventDateInput = document.getElementById("eventDateInput");
-        var eventTimeInput = document.getElementById("eventTime");
-        var eventLocationInput = document.getElementById("eventLocation");
-        var eventDescriptionInput = document.getElementById("eventDescription");
+        const eventNameInput = document.getElementById("eventName");
+        const eventDateInput = document.getElementById("eventDateInput");
+        const eventTimeInput = document.getElementById("eventTime");
+        const eventLocationInput = document.getElementById("eventLocation");
+        const eventDescriptionInput = document.getElementById("eventDescription");
         if (!eventNameInput || !eventDateInput || !eventTimeInput || !eventLocationInput || !eventDescriptionInput) {
             console.error("One or more input fields are missing");
             return;
         }
-        var eventName = eventNameInput.value.trim();
-        var eventDate = eventDateInput.value;
-        var eventTime = eventTimeInput.value;
-        var eventLocation = eventLocationInput.value.trim();
-        var eventDescription = eventDescriptionInput.value.trim();
-        var errors = [];
+        const eventName = eventNameInput.value.trim();
+        const eventDate = eventDateInput.value;
+        const eventTime = eventTimeInput.value;
+        const eventLocation = eventLocationInput.value.trim();
+        const eventDescription = eventDescriptionInput.value.trim();
+        let errors = [];
         if (!eventName)
             errors.push("Event name is required.");
         if (!eventDate) {
             errors.push("Event date is required.");
         }
         else {
-            var today = new Date().toISOString().split("T")[0];
+            const today = new Date().toISOString().split("T")[0];
             if (eventDate < today)
                 errors.push("Event date cannot be in the past.");
         }
@@ -61,7 +56,7 @@ document.addEventListener("DOMContentLoaded", function () {
             errors.push("Event time is required.");
         }
         else {
-            var timeRegex = /^([01]?\d|2[0-3]):([0-5]\d)$/;
+            const timeRegex = /^([01]?\d|2[0-3]):([0-5]\d)$/;
             if (!timeRegex.test(eventTime))
                 errors.push("Invalid time format. Use HH:MM (24-hour format).");
         }
@@ -76,33 +71,40 @@ document.addEventListener("DOMContentLoaded", function () {
             return;
         }
         console.log("Form validation passed. Ready to submit.");
-        var newEvent = {
+        const newEvent = {
             name: eventName,
             date: eventDate,
             time: eventTime,
             location: eventLocation,
             description: eventDescription
         };
-        var events = JSON.parse(localStorage.getItem("events") || "[]");
+        let events = JSON.parse(localStorage.getItem("events") || "[]");
         events.push(newEvent);
         localStorage.setItem("events", JSON.stringify(events));
         displayEvents();
         eventForm.reset();
     });
     function displayEvents() {
-        var eventList = document.getElementById("eventList");
+        const eventList = document.getElementById("eventList");
         if (!eventList) {
             console.error("Event list container not found");
             return;
         }
         eventList.innerHTML = "";
-        var events = JSON.parse(localStorage.getItem("events") || "[]");
-        events.forEach(function (event) {
-            var eventItem = document.createElement("div");
+        let events = JSON.parse(localStorage.getItem("events") || "[]");
+        events.forEach((event) => {
+            const eventItem = document.createElement("div");
             eventItem.classList.add("event-item", "card", "p-3", "mb-3");
-            eventItem.innerHTML = "\n                <h5>".concat(event.name, "</h5>\n                <p><strong>Date:</strong> ").concat(event.date, "</p>\n                <p><strong>Time:</strong> ").concat(event.time, "</p>\n                <p><strong>Location:</strong> ").concat(event.location, "</p>\n                <p>").concat(event.description, "</p>\n            ");
+            eventItem.innerHTML = `
+                <h5>${event.name}</h5>
+                <p><strong>Date:</strong> ${event.date}</p>
+                <p><strong>Time:</strong> ${event.time}</p>
+                <p><strong>Location:</strong> ${event.location}</p>
+                <p>${event.description}</p>
+            `;
             eventList.appendChild(eventItem);
         });
     }
     displayEvents();
 });
+//# sourceMappingURL=event.js.map
