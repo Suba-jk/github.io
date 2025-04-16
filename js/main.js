@@ -13,6 +13,18 @@ document.addEventListener("DOMContentLoaded", function () {
         .then(response => response.text())
         .then(data => {
             document.getElementById("navbar-container").innerHTML = data;
+            let logout = document.getElementById("li_logoutId");
+            let login = document.getElementById("li_loginId");
+            let user = sessionStorage.getItem("user");
+            //alert(user);
+            if (user) {
+                login.setAttribute("hidden","hidden");
+                logout.removeAttribute("hidden");
+            }else{
+                logout.setAttribute("hidden","hidden");
+                login.removeAttribute("hidden");
+            }
+
         })
         .catch(error => console.error("Error loading navbar:", error));
 });
