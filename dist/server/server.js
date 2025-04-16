@@ -8,8 +8,6 @@ const express_session_1 = __importDefault(require("express-session"));
 const path_1 = __importDefault(require("path"));
 const url_1 = require("url");
 const dotenv_1 = __importDefault(require("dotenv"));
-const dotenv = require('dotenv');
-dotenv.config();
 const contactRoutes_js_1 = __importDefault(require("./contactRoutes.js"));
 const database_js_1 = __importDefault(require("./database.js"));
 dotenv_1.default.config();
