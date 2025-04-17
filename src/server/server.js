@@ -1,42 +1,96 @@
-
-import express from 'express';
-import session from 'express-session';
-import path from 'path';
-import { fileURLToPath } from 'url';
-import dotenv from 'dotenv';
-import contactRoutes from './contactRoutes.js';
-import Database from './database.js';
-dotenv.config();
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-const app = express();
-const port = process.env.PORT || 3000;
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-app.use(session({
+"use strict";
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+var __generator = (this && this.__generator) || function (thisArg, body) {
+    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g = Object.create((typeof Iterator === "function" ? Iterator : Object).prototype);
+    return g.next = verb(0), g["throw"] = verb(1), g["return"] = verb(2), typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
+    function verb(n) { return function (v) { return step([n, v]); }; }
+    function step(op) {
+        if (f) throw new TypeError("Generator is already executing.");
+        while (g && (g = 0, op[0] && (_ = 0)), _) try {
+            if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
+            if (y = 0, t) op = [op[0] & 2, t.value];
+            switch (op[0]) {
+                case 0: case 1: t = op; break;
+                case 4: _.label++; return { value: op[1], done: false };
+                case 5: _.label++; y = op[1]; op = [0]; continue;
+                case 7: op = _.ops.pop(); _.trys.pop(); continue;
+                default:
+                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
+                    if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
+                    if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
+                    if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
+                    if (t[2]) _.ops.pop();
+                    _.trys.pop(); continue;
+            }
+            op = body.call(thisArg, _);
+        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
+        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
+    }
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var express_1 = require("express");
+var express_session_1 = require("express-session");
+var path_1 = require("path");
+var url_1 = require("url");
+var dotenv_1 = require("dotenv");
+var contactRoutes_js_1 = require("./contactRoutes.js");
+var database_js_1 = require("./database.js");
+dotenv_1.default.config();
+var __filename = (0, url_1.fileURLToPath)(import.meta.url);
+var __dirname = path_1.default.dirname(__filename);
+var app = (0, express_1.default)();
+var port = process.env.PORT || 3000;
+// Middleware
+app.use(express_1.default.json());
+app.use(express_1.default.urlencoded({ extended: true }));
+app.use((0, express_session_1.default)({
     secret: process.env.SESSION_SECRET || 'secret123',
     resave: false,
     saveUninitialized: false
 }));
-app.use(express.static(path.join(__dirname, '../..')));
-app.use('/node_modules/@fortawesome/fontawesome-free', express.static(path.join(__dirname, '../../node_modules/@fortawesome/fontawesome-free')));
-app.use('/node_modules/bootstrap', express.static(path.join(__dirname, '../../node_modules/bootstrap')));
-app.use('/api/contacts', contactRoutes);
-app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, '../..', 'index.html'));
+// Static files
+app.use(express_1.default.static(path_1.default.join(__dirname, '../..')));
+app.use('/node_modules/@fortawesome/fontawesome-free', express_1.default.static(path_1.default.join(__dirname, '../../node_modules/@fortawesome/fontawesome-free')));
+app.use('/node_modules/bootstrap', express_1.default.static(path_1.default.join(__dirname, '../../node_modules/bootstrap')));
+// Routes
+app.use('/api/contacts', contactRoutes_js_1.default);
+app.get('/', function (req, res) {
+    res.sendFile(path_1.default.join(__dirname, '../..', 'index.html'));
 });
-async function startServer() {
-    try {
-        const db = Database.getInstance();
-        await db.connect();
-        app.listen(port, () => {
-            console.log(`[INFO] Server started on http://localhost:${port}`);
+// Start server
+function startServer() {
+    return __awaiter(this, void 0, void 0, function () {
+        var db, error_1;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0:
+                    _a.trys.push([0, 2, , 3]);
+                    db = database_js_1.default.getInstance();
+                    return [4 /*yield*/, db.connect()];
+                case 1:
+                    _a.sent();
+                    app.listen(port, function () {
+                        console.log("[INFO] Server started on http://localhost:".concat(port));
+                    });
+                    return [3 /*break*/, 3];
+                case 2:
+                    error_1 = _a.sent();
+                    console.error("[ERROR] Failed to start server:", error_1);
+                    process.exit(1);
+                    return [3 /*break*/, 3];
+                case 3: return [2 /*return*/];
+            }
         });
-    }
-    catch (error) {
-        console.error("[ERROR] Failed to start server:", error);
-        process.exit(1);
-    }
+    });
 }
-await startServer();
-//# sourceMappingURL=server.js.map
+startServer().catch(function (err) {
+    console.error("[FATAL] Server crash:", err);
+});

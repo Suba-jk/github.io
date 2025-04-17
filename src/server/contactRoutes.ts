@@ -15,6 +15,8 @@ interface Contact {
 }
 
 
+
+
 //Retrieve all Contacts
 router.get('/', async (req: Request, res: Response) => {
     try{
@@ -100,5 +102,6 @@ router.delete('/:id', async (req: Request, res: Response) => {
         res.status(500).json({message: "Server Error"});
     }
 });
+
 
 export default router;

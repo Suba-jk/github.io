@@ -68,6 +68,10 @@
       </div>
     </div>
   </div>
+  <hr>
+  <h3 class="mt-4">Messages from Visitors</h3>
+  <div id="contactMessages" class="mt-3"></div>
+
 </main>
 
 <!-- JavaScript -->
@@ -80,6 +84,32 @@
 
 <!-- Contact-specific script -->
 <script src="./js/contact.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', loadContactMessages);
+
+  function loadContactMessages() {
+    fetch('/api/contacts')
+            .then(res => res.json())
+            .then(contacts => {
+              const messageContainer = document.getElementById('contactMessages');
+              messageContainer.innerHTML = '';
+
+              contacts.forEach(contact => {
+                const div = document.createElement('div');
+                div.className = 'border p-2 mb-2 rounded';
+                div.innerHTML = `
+          <strong>${contact.fullName}</strong><br>
+          <em>${contact.feedback}</em>
+        `;
+                messageContainer.appendChild(div);
+              });
+            })
+            .catch(err => {
+              console.error('Failed to load contact messages:', err);
+            });
+  }
+</script>
+
 
 </body>
 </html>

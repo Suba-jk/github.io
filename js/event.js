@@ -1,8 +1,15 @@
 "use strict";
+/**
+ * Handles event form validation, event storage, and dynamic display.
+ * Also handles login check for showing the form.
+ */
 document.addEventListener("DOMContentLoaded", function () {
     const proposeBtn = document.getElementById("proposeEventBtn");
     const eventFormSection = document.getElementById("eventFormSection");
     const eventForm = document.getElementById("eventForm");
+    //const welcomeText = document.getElementById("welcomeId");
+    //const user = sessionStorage.getItem("user");
+    //
     const user = sessionStorage.getItem("user");
     const welcomeText = document.getElementById("welcomeId");
     if (user && welcomeText) {
@@ -107,4 +114,3 @@ document.addEventListener("DOMContentLoaded", function () {
     }
     displayEvents();
 });
-//# sourceMappingURL=event.js.map
