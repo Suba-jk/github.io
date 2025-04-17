@@ -114,3 +114,4 @@ document.addEventListener("DOMContentLoaded", function () {
     }
     displayEvents();
 });
+//# sourceMappingURL=event.js.map
